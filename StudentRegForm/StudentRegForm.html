@@ -1,0 +1,168 @@
+<html>
+  <head>
+    <title>Student Form</title>
+
+    <style>
+      .error {
+        color: red;
+      }
+
+      table {
+        border-collapse: collapse;
+        border: 1px solid #ccc;
+      }
+
+      th,
+      td {
+        padding: 10px 20px;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <h1>Student Form</h1>
+      <form id="registrationForm">
+        <table>
+          <tr>
+            <th><label for="firstname"> First Name </label></th>
+            <td>
+              <input type="text" id="firstname" />
+              <div id="firstnameError" class="error"></div>
+            </td>
+
+            <th><label for="lastname"> Last Name </label></th>
+            <td>
+              <input type="text" id="lastname" />
+              <div id="lastnameError" class="error"></div>
+            </td>
+          </tr>
+
+          <tr>
+            <th><label for="email"> Email </label></th>
+            <td>
+              <input type="email" id="email" />
+              <div id="emailError" class="error"></div>
+            </td>
+          </tr>
+
+          <tr>
+            <th>Gender</th>
+            <td>
+              <input type="radio" name="gender" value="male" /> Male
+              <br />
+              <input type="radio" name="gender" value="female" /> Female
+              <div id="genderError" class="error"></div>
+            </td>
+          </tr>
+
+          <tr>
+            <th>Course Interested</th>
+            <td>
+              <input type="checkbox" name="courses" value="HTML" /> HTML
+              <br />
+              <input type="checkbox" name="courses" value="Python" /> Python
+              <br />
+              <input type="checkbox" name="courses" value="Java" /> Java
+              <br />
+              <div id="courseError" class="error"></div>
+            </td>
+          </tr>
+
+          <tr>
+            <th>Country</th>
+            <td>
+              <select id="country">
+                <option value="">Enter Country</option>
+                <option value="India">India</option>
+                <option value="US">US</option>
+              </select>
+              <div id="countryError" class="error"></div>
+            </td>
+          </tr>
+
+          <tr>
+            <th><label for="comments"> Comments </label></th>
+            <td>
+              <textarea id="comments" rows="5"></textarea>
+              <div id="commentsError" class="error"></div>
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="4" style="text-align: center">
+              <button type="button" onclick="ValidateForm()">Submit</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+
+    <script>
+      function ValidateForm() {
+        let isValid = true;
+
+        document.querySelectorAll(".error").forEach((e) => (e.innerText = ""));
+
+        const firstName = document.getElementById("firstname").value.trim();
+        const lastName = document.getElementById("lastname").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const gender = document.querySelector('input[name="gender"]:checked');
+        const courses = document.querySelectorAll(
+          'input[name="courses"]:checked'
+        );
+        const country = document.getElementById("country").value;
+        const comments = document.getElementById("comments").value.trim();
+
+        const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+        if (!firstName) {
+          document.getElementById("firstnameError").innerText =
+            "First name is required";
+          isValid = false;
+        }
+
+        if (!lastName) {
+          document.getElementById("lastnameError").innerText =
+            "Last name is required";
+          isValid = false;
+        }
+
+        if (!email || !emailPattern.test(email)) {
+          document.getElementById("emailError").innerText =
+            "Valid Email is required";
+          isValid = false;
+        }
+
+        if (!gender) {
+          document.getElementById("genderError").innerText =
+            "Gender is required";
+          isValid = false;
+        }
+
+        if (courses.length === 0) {
+          document.getElementById("courseError").innerText =
+            "Courses is required";
+          isValid = false;
+        }
+
+        if (!country) {
+          document.getElementById("countryError").innerText =
+            "Country is required";
+          isValid = false;
+        }
+
+        if (!comments) {
+          document.getElementById("commentsError").innerText =
+            "Please enter your motivation.";
+          isValid = false;
+        }
+
+        if (isValid) {
+          alert("Registered");
+        }
+      }
+    </script>
+  </body>
+</html>

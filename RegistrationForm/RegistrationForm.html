@@ -1,0 +1,120 @@
+<html>
+    <head>
+        <title> Registration Form </title>
+    </head>
+    <style>
+        table {
+            width: 500px;
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .submit-row {
+            text-align: center;
+            padding: 10px;
+        }
+        .error{
+            color: red;
+        }
+    </style>
+    <body>
+        <form id  = "personalInfoForm">
+            <table>
+                <tr>
+                    <th><label for = "name">NAME</th>
+                    <td>
+                        <input type= "text" id = "name" />
+                        <div id = "nameError" class = "error"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th> SEX </th>
+                    <td> 
+                        <input type="radio" id = "male" name = "sex" value = "Male" />
+                        <label for = "male"> MALE </label> <br />
+                        <input type="radio" id = "female" name = "sex" value = "Female" />
+                        <label for = "female"> FEMALE </label>
+                        <div id = "sexError" class = "error"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for = "eyeColor"> Eye Colour </label></th>
+                    <td>
+                        <select id = "eyeColor">
+                            <option value = ""> Select eye Colour </option>
+                            <option value = "red"> Red </option>
+                        </select>
+                        <div id = "eyeColorError" class = "error"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th> Check all the apply </th>
+                    <td>
+                        <input type = "checkbox" id = "over6feet" name = "attributes" value = "Over 6 feet tall" />
+                        <label for = "over6feet"> Over 6 feet Tall </label> <br />
+                        <input type = "checkbox" id = "over200pounds" name = "attributes" value = "Over 200 pounds"/>
+                        <label for = "over200pounds"> Over 200 pounds </label>
+                        <div id = "applyError" class = "error"></div> 
+                    </td>
+                </tr>
+                <tr>
+                    <th> <label for = "atheleticAbility"> Describe your athletic ability: </th>
+                        <td> 
+                            <textarea id = "atheleticAbility"> </textarea>
+                            <div id = "athleticAbilityError" class = "error"></div>
+                        </td>
+                </tr>
+                <tr> 
+                    <td colspan = "2" class = "submit-row">
+                        <input type = "button" value = "Enter info" class = "submit-button" onclick = "validateForm()" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <script> 
+            function validateForm() {
+                isValid = true;
+
+                 // Clear previous error messages
+                document.getElementById("nameError").innerText = "";
+                document.getElementById("sexError").innerText = "";
+                document.getElementById("eyeColorError").innerText = "";
+                document.getElementById("athleticAbilityError").innerText = "";
+
+                //Name
+                const name = document.getElementById("name").value.trim();
+                if (!name) {
+                    document.getElementById("nameError").innerText = "Name is required";
+                    isValid = false;
+                }
+
+                const sexSelected = document.querySelector('input[name="sex"]:checked');
+                if (!sexSelected) {
+                    document.getElementById("sexError").innerText = "Please select your Sex";
+                    isValid = false;
+                }
+
+                const eyeColorSelected = document.getElementById('eyeColor').value;
+                if (!eyeColorSelected) {
+                    document.getElementById('eyeColorError').innerText = "Please select an eye color";
+                    isValid = false;
+                }
+
+                const athleticAbility = document.getElementById("atheleticAbility").value.trim();
+                if (!athleticAbility) {
+                    document.getElementById("athleticAbilityError").innerText = "Please describe your athletic ability";
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    alert("Form submitted!")
+                }
+
+            }
+        </script>
+    </body>
+</html>
